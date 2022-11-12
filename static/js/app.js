@@ -24,3 +24,24 @@ function buildTable(data) {
         });        
     });
 }
+
+function handleClick() {
+    // holds value from input
+    let date = d3.select("#datetime").property("value");
+
+    let filteredData = tableData;
+
+    // filter condition
+    if (date) {
+        filteredData = filteredData.filter(row => row.datetime === date);
+    };
+
+    // builds table from filtered data
+    buildTable(filteredData);
+}
+
+// Attach an event to listen for the form button
+d3.selectAll("#filter-btn").on("click", handleClick);
+
+// Build the table when the page loads
+buildTable(tableData);
